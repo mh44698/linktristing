@@ -1,0 +1,37 @@
+[{
+    "name": "first-link",
+    "description": "Yahoo",
+    "link": "http://www.yahoo.com",
+    "categories": "movie",
+    "linkfavorite": true,
+    "linkimage": "fav.ico" 
+},
+{
+    "name": "second-link",
+    "description": "Google",
+    "link": "http://www.google.com",
+    "linkfavorite": false,
+    "linkimage": "fav.ico" 
+},
+{
+    "name": "third-link",
+    "description": "Pinterest",
+    "link": "https://www.pinterest.com/",
+    "linkfavorite": false,
+    "linkimage": "fav.ico" 
+},
+{
+    "name": "fourth-link",
+    "description": "Airbnb",
+    "link": "https://www.airbnb.com",
+    "linkfavorite": false,
+    "linkimage": "fav.ico" 
+},
+{
+    "name": "fifth-link",
+    "description": "GA",
+    "link": "https://generalassemb.ly/",
+    "linkfavorite": true,
+    "linkimage": "fav.ico" 
+}
+]

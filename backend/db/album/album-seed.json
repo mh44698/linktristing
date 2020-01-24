@@ -1,0 +1,22 @@
+[{
+    "title": 1,
+    "description": "My First Album",
+    "favorite": true,
+    "categories": "movie",
+    "linklist": ["first-link","second-link","third-link"]
+},
+{
+    "title": 2,
+    "description": "My Second Album",
+    "favorite": true,
+    "categories": "sports",
+    "linklist": ["forth-link","fifth-link","sixth-link"]
+},
+{
+    "title": 3,
+    "description": "My Third Album",
+    "favorite": true,
+    "categories": "education",
+    "linklist": ["seventh-link","eighth-link","ninth-link"]
+}
+]

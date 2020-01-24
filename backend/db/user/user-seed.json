@@ -1,0 +1,28 @@
+[{
+    "firstname": "Amy",
+    "lastname": "Reid",
+    "username": "arreid08",
+    "password": "12345",
+    "email": "areid@aol.com",
+    "image": "find a string to edit",
+    "albums": ["first","second","third"]
+},
+{
+    "firstname": "Kiresten",
+    "lastname": "Forester",
+    "username": "kirsten4ester",
+    "password": "12345",
+    "email": "kForester@aol.com",
+    "image": "find a string to edit",
+    "albums": ["first","second","third"]
+},
+{
+    "firstname": "James",
+    "lastname": "Rodgers",
+    "username": "JamRod",
+    "password": "12345",
+    "email": "JRodgers@aol.com",
+    "image": "find a string to edit",
+    "albums": ["first","second","third"]
+}
+]
