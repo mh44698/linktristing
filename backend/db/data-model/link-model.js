@@ -1,4 +1,4 @@
-const mongoose = require("../db/link/connections");
+const mongoose = require("../connection");
 
 const LinkSchema = new mongoose.Schema({
   title: String,
