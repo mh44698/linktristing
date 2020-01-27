@@ -11,7 +11,7 @@ mongoose
   )
   .catch(err => console.log("Connection Failed.", err));
 
-// module.exports = mongoose;
+module.exports = mongoose;
 
 
 mongoose.Promise = Promise;
