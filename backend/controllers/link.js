@@ -2,35 +2,35 @@ const express = require("express")
 const router = express.Router()
 
 
-const User = require("../db/models/User")
-const Album = require("../db/models/Album")
-const Link = require("../db/models/Link")
+const User = require("../db/models/user-model")
+const Collection = require("../db/models/collection-model")
+const Link = require("../db/models/link-model")
 
 router.get("/", (req, res) => {
-    User.find().then(Users => {
-        res.json(users)
+    Link.find().then(links => {
+        res.json(links)
     })
 })
 
 router.get("/:id", (req, res) => {
-    User.findOne({ _id: req.params.id })
-        .then(user => res.json(user))
+    Link.findOne({ _id: req.params.id })
+        .then(link => res.json(link))
 })
 
 router.post("/:id", (req, res) => {
     Link.create(req.body)
         .then(link => {
-            Album.findOne({ _id: req.params.id })
+            Collection.findOne({ _id: req.params.id })
+                .then(collection => {
+                    collection.linklist.push(link._id)
+                    collection.save()
+                        .then(collection => { res.json(collection) })
+                })
         })
-        .then(album => {
-            album.links.push(link._id)
-            album.save()
-        })
-        .then(album => { res.json(album) })
 })
 
-router.put("/:id", (res, req) => {
-    Link.findOneAndUpdate({ id: req.params.id }, req.body)
+router.put("/:id", (req, res) => {
+    Link.findOneAndUpdate({ _id: req.params.id }, req.body)
         .then(link => { res.json(link) })
 })
 

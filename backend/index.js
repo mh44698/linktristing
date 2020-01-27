@@ -3,7 +3,7 @@ const app = express()
 
 const parser = require("body-parser");
 const cors = require("cors");
-const albumController = require("./controllers/album")
+const collectionController = require("./controllers/collection")
 const userController = require("./controllers/user")
 const linkController = require("./controllers/link")
 
@@ -15,11 +15,11 @@ app.use(parser.urlencoded({ extended: true }));
 app.use(parser.json());
 
 app.get("/", (req, res) => {
-    res.redirect("/user");
+    res.redirect("/api/user");
 });
 
 app.use("/api/user", userController)
-app.use("/api/album", albumController)
+app.use("/api/collection", collectionController)
 app.use("/api/link", linkController)
 
 app.listen(4000, () => {

@@ -7,9 +7,9 @@ const UsersSchema = new mongoose.Schema({
   password: String,
   email: String,
   image: String,
-  albums: Array,
+  collections: Array,
 });
 // instantiate the model, calling it "Bookmark" and with the schema we just made
-const Users = mongoose.model("Users", UsersSchema);
+const User = mongoose.model("User", UsersSchema);
 // export the newly created model
-module.exports = Users
+module.exports = User
