@@ -3,7 +3,7 @@ const mongoose = require("../connection");
 const CollectionSchema = new mongoose.Schema({
   title: String,
   description: String,
-  tags: [],
+  tags: Array,
   linklist: Array,
   parent: {
     ref: "User",

@@ -2,22 +2,19 @@
   {
     "title": 1,
     "description": "My First Collection",
-    "favorite": true,
-    "categories": "movie",
+    "tags": "",
     "linklist": []
   },
   {
     "title": 2,
     "description": "My Second Collection",
-    "favorite": true,
-    "categories": "sports",
+    "tags": "sports",
     "linklist": []
   },
   {
     "title": 3,
     "description": "My Third Collection",
-    "favorite": true,
-    "categories": "education",
+    "tags": "education",
     "linklist": []
   }
 ]
