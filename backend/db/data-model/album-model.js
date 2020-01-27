@@ -1,4 +1,4 @@
-const mongoose = require("../db/album/connections");
+const mongoose = require("../db/connections");
 
 const AlbumsSchema = new mongoose.Schema({
   title: String,
@@ -8,6 +8,6 @@ const AlbumsSchema = new mongoose.Schema({
   linklist: Array,
 });
 // instantiate the model, calling it "Bookmark" and with the schema we just made
-const Albums = mongoose.model("Albums", AlbumsSchema);
+const Albums = mongooseAlbum.model("Albums", AlbumsSchema);
 // export the newly created model
 module.exports = Albums
