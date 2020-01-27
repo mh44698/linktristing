@@ -1,0 +1,20 @@
+{
+  "name": "linktristing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mh44698/linktristing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mh44698/linktristing/issues"
+  },
+  "homepage": "https://github.com/mh44698/linktristing#readme"
+}
