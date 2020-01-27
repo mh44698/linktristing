@@ -37,12 +37,16 @@ router.delete("/:id", (req, res) => {
         .then(user => {
             if (user.collections.length > 0) {
                 user.collections.forEach(collection => {
-                    if (collection.links.length > 0) {
-                        collection.links.forEach(link => {
-                            Link.findOneAndDelete({ _id: link._id })
+                    Collection.findOne({ _id: collection._id })
+                        .then(collection => {
+                            if (collection.linklist.length > 0) {
+                                collection.linklist.forEach(link => {
+                                    Link.findOneAndDelete({ _id: link._id })
+                                })
+                            }
+                            Collection.findOneAndDelete({ _id: collection._id })
                         })
-                    }
-                    Collection.findOneAndDelete({ _id: collection._id })
+
                 })
             }
             return user

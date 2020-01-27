@@ -22,8 +22,10 @@ router.post("/:id", (req, res) => {
         .then(user => {
             Collection.create(req.body)
                 .then(collection => {
+                    collection.parent = user._id
                     user.collections.push(collection._id)
                     user.save()
+                    collection.save()
                 })
         })
         .then(user => { res.json(user) })
@@ -37,16 +39,25 @@ router.put("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
     Collection.findOne({ _id: req.params.id })
         .then(collection => {
-            if (collection.links.length > 0) {
-                collection.links.forEach(link => {
+            if (collection.linklist.length > 0) {
+                collection.linklist.forEach(link => {
                     Link.findOneAndDelete({ _id: link._id })
                 })
             }
         })
         .then(collection => {
             Collection.findOneAndDelete({ _id: req.params.id })
-                .then(collection => res.json(collection))
+                .then(collection => {
+                    User.findOne({ _id: collection.parent })
+                        .then(user => {
+                            let loc = user.collections.indexOf(collection._id)
+                            user.collections.splice(loc, 1)
+                            user.save()
+                        })
+                })
         })
+        .then(collection => { res.json(collection) })
+        .catch((err) => console.log(err))
 })
 
 

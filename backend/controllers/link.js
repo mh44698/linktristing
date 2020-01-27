@@ -24,6 +24,8 @@ router.post("/:id", (req, res) => {
                 .then(collection => {
                     collection.linklist.push(link._id)
                     collection.save()
+                    link.parent = collection._id
+                    link.save()
                         .then(collection => { res.json(collection) })
                 })
         })
@@ -36,7 +38,16 @@ router.put("/:id", (req, res) => {
 
 router.delete("/:id", (req, res) => {
     Link.findOneAndDelete({ _id: req.params.id })
+        .then(link => {
+            Collection.findOne({ _id: link.parent })
+                .then(collection => {
+                    let loc = collection.linklist.indexOf(collection._id)
+                    collection.linklist.splice(loc, 1)
+                    collection.save()
+                })
+        })
         .then(link => res.json(link))
+        .catch((err) => console.log(err))
 })
 
 

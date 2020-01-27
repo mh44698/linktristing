@@ -9,7 +9,7 @@ const LinkSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId
   }
 });
-// instantiate the model, calling it "Bookmark" and with the schema we just made
+
 const Links = mongoose.model("Links", LinkSchema);
-// export the newly created model
+
 module.exports = Links
