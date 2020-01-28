@@ -69,36 +69,62 @@ describe("POST /", () => {
                 username: "collectionPerson",
                 password: "password"
             })
-            .then(res => {
-                setUId(res._id)
-            })
             .end(done)
     })
     before(done => {
         api
-            .post("api/collection/")
+            .get("/api/user/name/collectionPerson")
+            .set("Accept", "application/json")
+            .then(res => {
+                setUId(res.body._id)
+                done()
+            })
+    })
+    before(done => {
+        let testUId = getUId()
+        api
+            .post(`/api/collection/${testUId}`)
             .set("Accept", " application/json")
             .send({
                 title: "Test collection",
-                description: "list of links",
-                parent: getUId()
-            })
-            .then(res => {
-                setColId(res._id)
+                description: "list of links"
             })
             .end(done)
     })
     before(done => {
         api
-            .post("/api/link")
+            .get("/api/user/name/collectionPerson")
+            .set("Accept", "application/json")
+            .then(res => {
+                setColId(res.body.collections[0])
+                done()
+            })
+
+    })
+
+    before(done => {
+        let testColId = getColId()
+        api
+            .post(`/api/link/${testColId}`)
             .set("Accept", "application/json")
             .send({
                 title: "Test",
-                link: "mylink.com",
+                link: "mylink.com"
             })
             .end(done)
     })
-    it("Should add new user and collection and link then return link", function (done) {
+    before(done => {
+        let testColId = getColId()
+        api
+            .get(`/api/collection/${testColId}`)
+            .set("Accept", "application/json")
+            .then(res => {
+                setLinkId(res.body.linklist[0])
+                done()
+            })
+    })
+
+    it("Should add new user and collection and link then get link by id", function (done) {
         let link = getLinkId()
         api
             .get(`/api/link/${link}`)
@@ -106,69 +132,60 @@ describe("POST /", () => {
             .end(function (err, res) {
                 expect(res.body).to.include({
                     title: "Test",
-                    link: "mylink.com",
+                    link: "mylink.com"
                 })
                 done()
             })
     })
 })
 
-// describe("GET /api/user/:id", () => {
-//     let testId
-//     before(done => {
-//         api
-//             .get("/api/user/name/testPerson")
-//             .set("Accept", " application/json")
-//             .end((err, res) => {
-//                 testId = res.body._id;
-//                 done();
-//             })
-//     })
-//     it("Should gets id from username search then return one result based off of id", done => {
-//         api
-//             .get(`/api/user/${testId}`)
-//             .set("Accept", "application/json")
-//             .end((err, res) => {
-//                 expect(res.body._id).to.equal(testId)
-//                 done()
-//             })
-//     })
-// })
+describe("PUT /api/link/:id", () => {
 
-// describe("PUT /api/user/:id", () => {
-//     let testId;
-//     before(done => {
-//         api
-//             .get("/api/user/name/testPerson")
-//             .set("Accept", " application/json")
-//             .end((err, res) => {
-//                 testId = res.body._id
-//                 done()
-//             })
-//     })
-//     before(done => {
-//         api
-//             .put(`/api/user/${testId}`)
-//             .send({
-//                 _id: testId,
-//                 firstname: "Other",
-//                 lastname: "Person",
-//                 username: "testPerson",
-//                 password: "password"
-//             })
-//             .set("Accept", "application/json")
-//             .end(done)
-//     })
-//     it("Should change the name and confirm user was updated", done => {
-//         api
-//             .get(`/api/user/${testId}`)
-//             .set("Accept", "application/json")
-//             .end((err, res) => {
-//                 expect(res.body.firstname).to.equal("Other")
-//                 done()
-//             })
-//     })
-// })
+    before(done => {
+        let testLinkId = getLinkId()
+        api
+            .put(`/api/link/${testLinkId}`)
+            .send({
+                link: "changedlink.com"
+            })
+            .set("Accept", "application/json")
+            .end(done)
+    })
+    it("Should change the link then get link by id and confirm link was updated", done => {
+        let testLinkId = getLinkId()
+        api
+            .get(`/api/link/${testLinkId}`)
+            .set("Accept", "application/json")
+            .end((err, res) => {
+                expect(res.body.link).to.equal("changedlink.com")
+                done()
+            })
+    })
+})
+
+describe("PUT /api/collection/:id", () => {
+
+    before(done => {
+        let testColId = getColId()
+        api
+            .put(`/api/collection/${testColId}`)
+            .send({
+                description: "changed"
+            })
+            .set("Accept", "application/json")
+            .end(done)
+    })
+    it("Should change the collection then get collection by id and confirm collection was updated", done => {
+        let testColId = getColId()
+        api
+            .get(`/api/collection/${testColId}`)
+            .set("Accept", "application/json")
+            .end((err, res) => {
+                expect(res.body.description).to.equal("changed")
+                done()
+            })
+    })
+})
 
 // describe("DELETE /api/user/:id", () => {
 //     let testId
