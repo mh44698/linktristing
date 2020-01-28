@@ -22,6 +22,11 @@ app.use("/api/user", userController)
 app.use("/api/collection", collectionController)
 app.use("/api/link", linkController)
 
-app.listen(4000, () => {
-    console.log('App is listening on port 4000')
+app.set("port", process.env.PORT || 8080);
+app.listen(app.get("port"), () => {
+    console.log(`PORT: ${app.get("port")}`);
 });
+
+// app.listen(4000, () => {
+//     console.log('App is listening on port 4000')
+// });
