@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 mongoose.Promise = Promise;
 
 // const mongo = "mongodb://localhost/link-trist";
-const mongoURI = ""
+let mongoURI = ""
 
 if (process.env.NODE_ENV === "production") {
   mongoURI = process.env.DB_URL;
@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 mongoose
-  .connect(mongo, { useNewUrlParser: true })
+  .connect(mongoURI, { useNewUrlParser: true })
   .then(instance =>
     console.log(`Connected to db: ${instance.connections[0].name}`)
   )
