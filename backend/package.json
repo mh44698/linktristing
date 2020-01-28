@@ -20,6 +20,7 @@
   "homepage": "https://github.com/mh44698/linktristing#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongo": "^0.1.0"
+    "mongo": "^0.1.0",
+    "mongoose": "^5.8.10"
   }
 }
