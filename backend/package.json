@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/mh44698/linktristing/issues"
   },
-  "homepage": "https://github.com/mh44698/linktristing#readme"
+  "homepage": "https://github.com/mh44698/linktristing#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongo": "^0.1.0"
+  }
 }
