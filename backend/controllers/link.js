@@ -17,6 +17,11 @@ router.get("/:id", (req, res) => {
         .then(link => res.json(link))
 })
 
+router.get("/s/:id", (req, res) => {
+    Link.find({ parent: req.params.id })
+        .then(links => res.json(links))
+})
+
 router.post("/:id", (req, res) => {
     Link.create(req.body)
         .then(link => {

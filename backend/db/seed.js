@@ -14,8 +14,11 @@ function seedOne(i) {
         .then(collection => {
           Link.create(linksRaw[i])
             .then(link => {
+              link.parent = collection._id
               collection.linklist.push(link._id)
+              collection.parent = user._id
               collection.save()
+              link.save()
             })
             .then(() => {
               user.collections.push(collection._id)
