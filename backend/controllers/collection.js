@@ -17,6 +17,12 @@ router.get("/:id", (req, res) => {
         .then(collection => res.json(collection))
 })
 
+//// This is a route to get many collections based on ID
+router.get("/collection/:id", (req, res) => {
+    Collection.findOne({ _id: req.params.id })
+        .then(collection => res.json(collection))
+})
+//End // This is a route to get many collections based on ID
 router.post("/:id", (req, res) => {
     User.findOne({ _id: req.params.id })
         .then(user => {

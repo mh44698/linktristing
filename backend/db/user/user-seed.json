@@ -22,5 +22,13 @@
     "password": "12345",
     "email": "JRodgers@aol.com",
     "image": "find a string to edit"
+  },
+  {
+    "firstname": "Mark",
+    "lastname": "Holmes",
+    "username": "MH44698",
+    "password": "12345",
+    "email": "MHolmes@aol.com",
+    "image": "find a string to edit"
   }
 ]
