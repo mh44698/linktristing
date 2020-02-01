@@ -5,6 +5,8 @@ const api = supertest("http://localhost:8080")
 let colId = ""
 let linkId = ""
 let uId = ""
+let = colId2 = ""
+let = linkId2 = ""
 
 function setLinkId(str) {
     return linkId = str
@@ -28,6 +30,22 @@ function setUId(str) {
 
 function getUId() {
     return uId
+}
+
+function setLinkId2(str) {
+    return linkId2 = str
+}
+
+function getLinkId2() {
+    return linkId2
+}
+
+function setColId2(str) {
+    return colId2 = str
+}
+
+function getColId2() {
+    return colId2
 }
 
 describe("GET /api/link/", () => {
@@ -214,6 +232,71 @@ describe("PUT /api/collection/:id", () => {
     })
 })
 
+describe("GET /api/collection/s/:id and /api/link/s/:id", () => {
+    before(done => {
+        let testUId = getUId()
+        api
+            .post(`/api/collection/${testUId}`)
+            .set("Accept", " application/json")
+            .send({
+                title: "Test collection 2",
+                description: "list of links 2"
+            })
+            .end(done)
+    })
+    before(done => {
+        api
+            .get("/api/user/name/collectionPerson")
+            .set("Accept", "application/json")
+            .then(res => {
+                setColId2(res.body.collections[1])
+                done()
+            })
+
+    })
+    before(done => {
+        const testColId = getColId()
+        api
+            .post(`/api/link/${testColId}`)
+            .set("Accept", " application/json")
+            .send({
+                title: "Test Link 2",
+                link: "www.link2"
+            })
+            .end(done)
+    })
+    before(done => {
+        const testColId = getColId()
+        api
+            .get(`/api/collection/${testColId}`)
+            .set("Accept", "application/json")
+            .then(res => {
+                setLinkId2(res.body.linklist[1])
+                done()
+            })
+    })
+    it("should add second collection and link, then confirm both GET collection/s/ will return multiple results", done => {
+        const testUId = getUId()
+        api
+            .get(`/api/collection/s/${testUId}`)
+            .set("Accept", "application/json")
+            .end((err, res) => {
+                expect(res.body).to.be.an("array")
+                done()
+            })
+    })
+    it("should add second collection and link, then confirm both GET link/s/ will return multiple results", done => {
+        const testColId = getColId()
+        api
+            .get(`/api/link/s/${testColId}`)
+            .set("Accept", "application/json")
+            .end((err, res) => {
+                expect(res.body).to.be.an("array")
+                done()
+            })
+    })
+})
+
 describe("DELETE / user, collection and link", () => {
     before(done => {
         const lid = getLinkId()
@@ -225,7 +308,24 @@ describe("DELETE / user, collection and link", () => {
 
     })
     before(done => {
+        const lid = getLinkId2()
+        api
+            .delete(`/api/link/${lid}`)
+            .set("Accept", "application/json")
+            .expect(res => { res.body._id = lid })
+            .end(done)
+
+    })
+    before(done => {
         const cid = getColId()
+        api
+            .delete(`/api/collection/${cid}`)
+            .set("Accept", "application/json")
+            .expect(res => { res.body._id = cid })
+            .end(done)
+    })
+    before(done => {
+        const cid = getColId2()
         api
             .delete(`/api/collection/${cid}`)
             .set("Accept", "application/json")
